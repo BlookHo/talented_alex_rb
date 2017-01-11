@@ -14,7 +14,6 @@ TextMaster's quest for global domination has prompted us to open a supermarket -
 |     CF1      |   Coffee     | $11.23  |
 +--------------|--------------|---------+
 ```
-
 Our CEO is a big fan of buy-one-get-one-free offers and of fruit tea. He wants us to add a rule to do this.
 
 The COO, though, likes low prices and wants people buying apple to get a price 
@@ -30,7 +29,6 @@ co.scan(item)
 co.scan(item)
 price = co.total
 ```
-
 Implement a checkout system that fulfils these requirements in Ruby.
 
 Here are some test data:
@@ -125,7 +123,6 @@ co.scan(item)
 co.scan(item)
 price = co.total
 
-co.analyse_cart - cart's products quantiies hash
 ```
 
 

@@ -1,43 +1,27 @@
 class Checkout
-  attr_reader :items, :prices, :pricing_rules, :cart_content
+  attr_reader :cart, :prices, :pricing_rules, :cart_content
+  attr_writer :cart_content
+
+  # todo:
+  # take away cart and replace it with cart_content everywhere
+  # use Product class - load products from json file of products data
 
   def initialize(pricing_rules)
     @pricing_rules = pricing_rules
-    @items = []
+    @cart = []
     @prices = {}
     @cart_content = {}
   end
 
-  def scan(item)
-    add_item(item)
-    # Нашел, не очень очевидно. Не думаю что в, по сути, сид файле стоит объявлять константу.
-    set_price(item, PRICE_LIST[item])
-    @cart_content = analyse_cart
-    apply_rules(pricing_rules, item)
+  def scan(product_code)
+    add_product_to_cart(product_code)
+    try_rules(pricing_rules, product_code)
+    p pricing_rules
     p "Current Total price = #{total}"
   end
 
-  def add_item(item)
-    items << item
-  end
-
-  def multiply_item(item, qty, i = 0)
-    while i == qty
-      items << item
-      i += 1
-    end
-  end
-
-  def set_price(item, price)
-    prices.merge!(item => price)
-  end
-
-  def analyse_cart
-    items.each_with_object(Hash.new(0)) { |object, hash| hash[object] += 1 }
-  end
-
-  # почему total принимает параметр?
-  def total#(price = 0)
+  #  reduce
+  def total
     price = 0
     cart_content.each do |product, qty|
       price += prices[product] * qty
@@ -45,32 +29,41 @@ class Checkout
     price.round(2)
   end
 
-  def apply_rules(pricing_rules, item)
+  private
+
+  def add_product_to_cart(product_code)
+    cart << product_code
+    prices.merge!(product_code => PRICE_LIST[product_code])
+  end
+
+  def analyse_cart
+    cart.each_with_object(Hash.new(0)) { |object, hash| hash[object] += 1 }
+  end
+
+  def try_rules(pricing_rules, product_code)
+    self.cart_content = analyse_cart  # change
     pricing_rules.each do |rule|
-      one_rule_apply(rule, item)
+      try_rule(rule, product_code)
     end
   end
 
-  def one_rule_apply(one_rule, item)
+  def try_rule(one_rule, product_code)
     rule = Rule.new(one_rule)
-    if rule.satisfies_conditions?(cart_content, item)
-      proceed_with_rule(rule)
+    if rule.satisfies_conditions?(cart_content, product_code)
+      execute_rule(rule)
     else
       # по хорошему надо все логи выводить только в случае если DEBUG=true из ENV https://github.com/bkeepers/dotenv
       puts "\nskip the rule: #{rule.title} \n\n"
     end
   end
 
-  private
-
-  def proceed_with_rule(rule)
-    update_content(rule)
-    update_price(rule)
+  def execute_rule(rule)
+    update_cart_content(rule)
+    update_cart_prices(rule)
   end
 
-  def update_content(rule)
-    cart_actions = rule.cart_actions
-    cart_actions.each do |action|
+  def update_cart_content(rule)
+    rule.cart_actions.each do |action|
       # этот класс больно много знает о внутреннем устройстве Rule-ов
       one_action(action)
     end
@@ -83,7 +76,7 @@ class Checkout
     cart_content[product_name] = action_eval(
       cart_content[product_name], action_name, action_value
     )
-    update_items(product_name, action_value)
+    update_cart(product_name, action_value)
   end
 
   # больно метод похож на тот из rule.rb. Возможно стоит сделать отдельный класс
@@ -91,12 +84,12 @@ class Checkout
     instance_eval("#{cart_value}#{ACTIONS_METHODS[action_name]}#{action_value}")
   end
 
-# Без пояснений не ясно, каким образом заполнение массива вызывает update у items?
-  def update_items(product_name, action_value)
-    [1..action_value].each { items << product_name }
+# Без пояснений не ясно, каким образом заполнение массива вызывает update у cart?
+  def update_cart(product_name, action_value)
+    [1..action_value].each { cart << product_name }
   end
 
-  def update_price(rule)
+  def update_cart_prices(rule)
     rule.product_pricing.each { |one_pricing| pricing(one_pricing) }
   end
 

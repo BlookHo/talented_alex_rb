@@ -2,13 +2,11 @@ require './source/rule'
 require './source/constants'
 require './source/checkout'
 
-# Это константа
-filepath = 'rules.json'
-pricing_rules = Rule.load_rules(filepath)
+
+pricing_rules = Rule.load_rules(RULES_FILE)
 co = Checkout.new(pricing_rules)
 
 co.scan(:AP1)
-# # co.scan(:FR1)
 co.scan(:AP1)
 co.scan(:FR1)
 co.scan(:AP1)
@@ -29,5 +27,5 @@ co.scan(:AP1)
 # p co.items
 # p co.analyse_cart
 # p co.cart_content
-# p co.total.round(2)
+# p co.total(500).round(2)
 # p co.prices

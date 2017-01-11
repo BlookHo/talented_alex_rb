@@ -18,9 +18,11 @@ class Rule
   def satisfies_conditions?(cart_content, item)
     to_apply_rule = false
     conditions.each do |condition|
+      p "condition = #{condition}, cart_content = #{cart_content}, item = #{item}"
       to_apply_rule = should_be_applied?(condition, cart_content, item)
       return false unless to_apply_rule
     end
+    p "In satisfies_conditions?: = #{to_apply_rule}"
     to_apply_rule
     # http://apidock.com/ruby/Enumerable/all%3F
     # return conditions.all? { |condition| apply?(condition, cart_content, item) }

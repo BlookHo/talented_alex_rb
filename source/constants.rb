@@ -1,6 +1,8 @@
 PRICE_LIST = { FR1: 3.11, AP1: 5.00, CF1: 11.23 }.freeze
 PRODUCTS = { FR1: 'Fruit tea', AP1: 'Apple', CF1: 'Coffee' }.freeze
 
+RULES_FILE = 'rules.json'
+
 # Rule's methods
 COMPARE_METHODS = {
   more: '>', more_and_equal: '>=', less_and_equal: '<=', less: '<', equal: '=='
