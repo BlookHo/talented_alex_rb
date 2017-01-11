@@ -1,17 +1,17 @@
 require './source/rule'
-require './source/data'
+require './source/constants'
 require './source/checkout'
 
-p 'Start of CheckOut'
+# Это константа
 filepath = 'rules.json'
 pricing_rules = Rule.load_rules(filepath)
 co = Checkout.new(pricing_rules)
 
-# co.scan(:AP1)
+co.scan(:AP1)
 # # co.scan(:FR1)
-# co.scan(:AP1)
-# co.scan(:FR1)
-# co.scan(:AP1)
+co.scan(:AP1)
+co.scan(:FR1)
+co.scan(:AP1)
 # co.scan(:FR1)
 # co.scan(:CF1)
 # co.scan(:AP1)
