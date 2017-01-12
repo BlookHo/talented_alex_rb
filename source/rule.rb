@@ -1,56 +1,33 @@
-require 'json'
-
 class Rule
-  attr_reader :title, :conditions, :cart_actions, :product_pricing
+  attr_reader :title, :conditions, :cart_actions, :pricing_actions
 
   def initialize(rule)
     @title = rule['title']
     @conditions = rule['conditions']
     @cart_actions = rule['cart_actions']
-    @product_pricing = rule['product_pricing']
-  end
-
-# Этот метод используется только в сидах. Зачем он в этом классе?
-  def self.load_rules(filepath)
-    JSON.parse(File.read(filepath))['rules']
+    @pricing_actions = rule['pricing_actions']
   end
 
   def satisfies_conditions?(cart_content, item)
-    to_apply_rule = false
-    conditions.each do |condition|
-      p "condition = #{condition}, cart_content = #{cart_content}, item = #{item}"
-      to_apply_rule = should_be_applied?(condition, cart_content, item)
-      return false unless to_apply_rule
+    conditions.all? do |condition|
+      should_be_applied?(condition, cart_content) if item == condition['product_code'].to_sym
     end
-    p "In satisfies_conditions?: = #{to_apply_rule}"
-    to_apply_rule
-    # http://apidock.com/ruby/Enumerable/all%3F
-    # return conditions.all? { |condition| apply?(condition, cart_content, item) }
   end
 
-  def should_be_applied?(condition, cart_content, item)
-    to_apply(condition, cart_content) if item == condition['product_name'].to_sym
-  end
-
-# если метод возвращает булиан, то стоит его называть с ?
-# и есть to_apply? то непонятно, в чем разница по смыслу применения между этим и apply? методом
-  def to_apply(condition, cart_content)
-    to_apply = false
+  def should_be_applied?(condition, cart_content)
     compare_method_name = condition['comparison'].to_sym
     if COMPARE_METHODS.keys.include?(compare_method_name)
-      to_apply = condition_eval?(
-        compare_method_name, cart_content[condition['product_name'].to_sym], condition['qty'].to_i
+      return condition_eval?(
+        cart_content[condition['product_code'].to_sym], compare_method_name, condition['qty'].to_i
       )
     else
       # почему не вызов validation error/аналог?
-      puts 'Validate your rule!'
+      puts "\nValidate your rule!"
     end
-    to_apply
+    false
   end
 
-  #  сходу непонятно, что тут происходит. как минимум нужен коммент с примером
-  # value_satisfies_conditional?
-  def condition_eval?(method_name, box_value, condition_value)
-    instance_eval("#{box_value}#{COMPARE_METHODS[method_name]}#{condition_value}")
+  def condition_eval?(object, compare_method_name, condition_value)
+    instance_eval("#{object}#{COMPARE_METHODS[compare_method_name]}#{condition_value}")
   end
 end

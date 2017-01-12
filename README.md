@@ -94,7 +94,7 @@ Each rule consists of following data:
   * title
   * conditions
   * cart_actions
-  * product_pricing
+  * pricing_actions
   
 Conditions, cart_actions and product_pricing - can be multiple in one rule.
 Each rule can be applied to product cart when all conditions fulfilled.
