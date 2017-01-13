@@ -31,8 +31,8 @@ class Checkout
   end
 
   def try_rules(product_code)
-    rules_apply = RulesApplier.new(self, product_code)
-    rules_apply.execute
+    rules_applier = RulesApplier.new(self, product_code)
+    rules_applier.execute
   end
 
   def update_cart(new_cart)

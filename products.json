@@ -3,17 +3,17 @@
     {
       "code": "FR1",
       "name": "Fruit tea",
-      "price": "3.11"
+      "price": 3.11
     },
     {
       "code": "AP1",
       "name": "Apple",
-      "price": "5.00"
+      "price": 5.00
     },
     {
       "code": "CF1",
       "name": "Coffee",
-      "price": "11.23"
+      "price": 11.23
     }
   ]
 }

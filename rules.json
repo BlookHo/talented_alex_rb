@@ -6,21 +6,21 @@
         {
           "product_code": "FR1",
           "comparison": "more",
-          "qty": "0"
+          "qty": 0
         }
       ],
       "cart_actions": [
         {
           "product_code": "FR1",
           "action": "add",
-          "qty": "1"
+          "qty": 1
         }
       ],
       "pricing_actions": [
         {
           "product_code": "FR1",
           "action": "divide",
-          "qty": "2"
+          "qty": 2
         }
       ]
 
@@ -31,7 +31,7 @@
         {
           "product_code": "AP1",
           "comparison": "more_and_equal",
-          "qty": "3"
+          "qty": 3
         }
       ],
       "cart_actions": [],
@@ -39,7 +39,7 @@
         {
           "product_code": "AP1",
           "action": "less_to",
-          "qty": "0.5"
+          "qty": 0.5
         }
       ]
     }
