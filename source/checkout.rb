@@ -5,7 +5,6 @@ class Checkout
   attr_writer :cart_content, :prices
 
   # todo:
-  # errors logs
   # RSpec
 
   def initialize(pricing_rules)
@@ -17,15 +16,12 @@ class Checkout
   def scan(product_code)
     add_product_to_cart(product_code)
     update_cart(try_rules(product_code))
-    puts "\nCurrent Total price = #{total}"
+    puts "\nCurrent Total price = #{total};"
   end
 
   def total
-    price = 0
-    cart_content.each { |product, qty| price += prices[product] * qty }
-    price.round(2)
+    cart_content.inject(0) { |price, (product, qty)| price += prices[product] * qty }
   end
-
 
   private
 

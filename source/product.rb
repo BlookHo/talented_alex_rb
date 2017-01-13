@@ -1,11 +1,12 @@
 class Product
   attr_accessor :products_attributes
 
+  @products = []
+
   def initialize(products_attributes)
     @products_attributes = products_attributes
   end
 
-  @products = []
   def self.init(products)
     products.each do |products_attributes|
       @products << Product.new(products_attributes)
@@ -27,7 +28,7 @@ class Product
     end
   end
 
-  def find_price()
-    self.products_attributes['price'].to_f
+  def find_price
+    products_attributes['price'].to_f
   end
 end

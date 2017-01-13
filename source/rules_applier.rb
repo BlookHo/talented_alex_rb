@@ -7,19 +7,18 @@ class RulesApplier
   end
 
   def execute
-    self.checkout.pricing_rules.each do |rule|
+    checkout.pricing_rules.each do |rule|
       try_rule(rule, product_code)
     end
-    self.checkout
+    checkout
   end
 
-  def try_rule(one_rule, product_code)
-    rule = Rule.new(one_rule)
-    if rule.satisfies_conditions?(self.checkout.cart_content, product_code)
+  def try_rule(rule_attr, product_code)
+    rule = Rule.new(rule_attr)
+    if rule.satisfies_conditions?(checkout.cart_content, product_code)
       execute_rule(rule, product_code)
       puts "\nexecute the rule: #{rule.title} \n"
     else
-      # по хорошему надо все логи выводить только в случае если DEBUG=true из ENV https://github.com/bkeepers/dotenv
       puts "\nskip the rule: #{rule.title} \n"
     end
   end
@@ -31,22 +30,32 @@ class RulesApplier
 
   def update_cart_content(cart_actions)
     cart_actions.each do |action|
-      self.checkout.cart_content[action['product_code'].to_sym] =
-        fulfill_action(action, self.checkout.cart_content[action['product_code'].to_sym], ACTIONS_METHODS)
+      checkout.cart_content[action['product_code'].to_sym] = updated_product(action)
     end
   end
 
-  def update_cart_prices(pricing_actions, product_code1)
+  def updated_product(action)
+    fulfill_action(action, product_in_cart(action), ACTIONS_METHODS)
+  end
+
+  def product_in_cart(action)
+    checkout.cart_content[action['product_code'].to_sym]
+  end
+
+  def update_cart_prices(pricing_actions, product_code)
     pricing_actions.each do |action|
-      self.checkout.prices[action['product_code'].to_sym] =
-        fulfill_action(action, Product.get_product_price(product_code1), PRICING_METHODS)
+      checkout.prices[action['product_code'].to_sym] = updated_price(action, product_code)
     end
+  end
+
+  def updated_price(action, product_code)
+    fulfill_action(action, Product.get_product_price(product_code), PRICING_METHODS)
   end
 
   def fulfill_action(action, action_object, action_methods)
     action_name = action['action'].to_sym
-    value = action['qty'].to_f
-    instance_eval("#{action_object} #{action_methods[action_name]} #{value}")
+    action_value = action['qty'].to_f
+    instance_eval("#{action_object} #{action_methods[action_name]} #{action_value}")
   end
 
 end
