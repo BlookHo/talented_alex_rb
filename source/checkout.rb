@@ -5,14 +5,11 @@ class Checkout
   attr_writer :cart_content, :prices
 
   # todo:
-  # use Product class - load products from json file of products data
   # errors logs
-  # reduce method total
-  # to_apply in rule.rb boolean?
+  # RSpec
 
   def initialize(pricing_rules)
     @pricing_rules = pricing_rules
-    # @cart = []
     @prices = {}
     @cart_content = {}
   end
@@ -23,19 +20,17 @@ class Checkout
     puts "\nCurrent Total price = #{total}"
   end
 
-  #  reduce
   def total
     price = 0
-    cart_content.each do |product, qty|
-      price += prices[product] * qty
-    end
+    cart_content.each { |product, qty| price += prices[product] * qty }
     price.round(2)
   end
+
 
   private
 
   def add_product_to_cart(product_code)
-    prices.merge!(product_code => PRICE_LIST[product_code])
+    prices.merge!(product_code => Product.get_product_price(product_code))
     cart_content.has_key?(product_code) ? cart_content[product_code] += 1 : cart_content.merge!(product_code => 1)
   end
 

@@ -5,7 +5,7 @@ gem 'nokogiri'
 gem 'rack'
 
 group :development do
-  gem 'byebug', platform: :mri
+  gem 'byebug', platform: :mri # https://github.com/deivid-rodriguez/byebug
   gem 'guard'
   gem 'guard-bundler', require: false
   gem 'guard-rspec', require: false

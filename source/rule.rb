@@ -21,7 +21,6 @@ class Rule
         cart_content[condition['product_code'].to_sym], compare_method_name, condition['qty'].to_i
       )
     else
-      # почему не вызов validation error/аналог?
       puts "\nValidate your rule!"
     end
     false

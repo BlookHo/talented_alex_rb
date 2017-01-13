@@ -1,10 +1,13 @@
 require './source/rule'
 require './source/constants'
 require './source/checkout'
-require './source/rules_parser'
+require './source/parser'
+require './source/product'
+require 'byebug' # byebug # pry
 
+pricing_rules = Parser.load_rules(RULES_FILE)
+Parser.load_products(PRODUCTS_FILE)
 
-pricing_rules = RulesParser.load_rules(RULES_FILE)
 co = Checkout.new(pricing_rules)
 
 co.scan(:AP1)
