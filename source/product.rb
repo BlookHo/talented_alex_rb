@@ -1,7 +1,6 @@
 class Product
   attr_accessor :products_attributes
 
-
   def initialize(products_attributes)
     @products_attributes = products_attributes
   end
