@@ -18,7 +18,7 @@ class Rule
     end
   end
 
-  def check_rule_to_execute?(object, compare_method_name, condition_value)
-    instance_eval("#{object}#{COMPARE_METHODS[compare_method_name]}#{condition_value}")
+  def check_rule_to_execute?(product_code, compare_method_name, condition_value)
+    instance_eval("#{product_code}#{COMPARE_METHODS[compare_method_name]}#{condition_value}")
   end
 end

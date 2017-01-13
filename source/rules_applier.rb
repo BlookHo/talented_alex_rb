@@ -30,7 +30,8 @@ class RulesApplier
 
   def update_cart_content(cart_actions)
     cart_actions.each do |action|
-      checkout.cart_content[action['product_code'].to_sym] = updated_product(action)
+      product_in_action = action['product_code'].to_sym
+      checkout.cart_content[product_in_action] = updated_product(action)
     end
   end
 
