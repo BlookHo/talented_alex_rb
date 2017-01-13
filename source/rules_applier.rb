@@ -55,7 +55,7 @@ class RulesApplier
 
   def fulfill_action(action, action_object, action_methods)
     action_name = action['action'].to_sym
-    action_value = action['qty'].to_f
+    action_value = action['qty']
     instance_eval("#{action_object} #{action_methods[action_name]} #{action_value}")
   end
 

@@ -13,7 +13,7 @@ class Rule
       check_rule_to_execute?(
         cart_content[condition['product_code'].to_sym],
         condition['comparison'].to_sym,
-        condition['qty'].to_i
+        condition['qty']
       ) if product_code == condition['product_code'].to_sym
     end
   end
