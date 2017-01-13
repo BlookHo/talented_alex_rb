@@ -1,11 +1,15 @@
 class Product
-  attr_accessor :price, :code, :name
+  attr_accessor :products_attributes
+
+
+  def initialize(products_attributes)
+    @products_attributes = products_attributes
+  end
 
   @products = []
-
   def self.init(products)
-    products.each do |product_attrs|
-      @products << Product.new(product_attrs)
+    products.each do |products_attributes|
+      @products << Product.new(products_attributes)
     end
   end
 
@@ -13,9 +17,18 @@ class Product
     @products
   end
 
-  def initialize(attributes)
-    @price = attributes[:price]
-    @code = attributes[:code]
-    @name = attributes[:name]
+  def self.get_product_price(code)
+    product = find_product(code)
+    product.find_price
+  end
+
+  def self.find_product(code)
+    all.each do |product|
+      return product if product.products_attributes['code'].to_sym == code
+    end
+  end
+
+  def find_price()
+    self.products_attributes['price'].to_f
   end
 end

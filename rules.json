@@ -4,21 +4,21 @@
       "title": "CEO Rule: buy-one-get-one-free Tea",
       "conditions": [
         {
-          "product_name": "FR1",
+          "product_code": "FR1",
           "comparison": "more",
           "qty": "0"
         }
       ],
       "cart_actions": [
         {
-          "product_name": "FR1",
+          "product_code": "FR1",
           "action": "add",
           "qty": "1"
         }
       ],
-      "product_pricing": [
+      "pricing_actions": [
         {
-          "product_name": "FR1",
+          "product_code": "FR1",
           "action": "divide",
           "qty": "2"
         }
@@ -29,15 +29,15 @@
       "title": "COO Rule: - buy 3 or more Apple, - drop price Apple -.5 USD",
       "conditions": [
         {
-          "product_name": "AP1",
+          "product_code": "AP1",
           "comparison": "more_and_equal",
           "qty": "3"
         }
       ],
       "cart_actions": [],
-      "product_pricing": [
+      "pricing_actions": [
         {
-          "product_name": "AP1",
+          "product_code": "AP1",
           "action": "less_to",
           "qty": "0.5"
         }
