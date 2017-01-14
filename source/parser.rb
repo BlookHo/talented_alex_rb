@@ -1,5 +1,6 @@
 require 'json'
 require './source/product'
+require './source/rule'
 
 # Download rules and products from JSON files (without database storage at the moment)
 class Parser
