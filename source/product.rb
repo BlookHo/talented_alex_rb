@@ -20,11 +20,14 @@ class Product
 
   def self.get_product_price(code)
     product = find_product(code)
-    product.product_price
+    product.nil? ? 0 : product.product_price
   end
 
   def self.find_product(code)
-    all.each { |product| return product if product.products_attributes['code'].to_sym == code }
+    all.each do |product|
+      return product if product.products_attributes['code'].to_sym == code
+    end
+    nil
   end
 
   def product_price

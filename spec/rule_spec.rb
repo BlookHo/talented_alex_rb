@@ -20,8 +20,6 @@ RSpec.describe Parser do
       let(:to_apply_rule) { rule.satisfies_conditions?(cart_content, product_code) }
       let(:product_code) { :FR1 }
       it 'check rule conditions' do
-        puts "rule.conditions = #{rule.conditions}"
-        puts "product_code = #{product_code}"
         expect(to_apply_rule).to eq(true)
       end
     end
@@ -30,8 +28,6 @@ RSpec.describe Parser do
       let(:to_apply_rule) { rule.satisfies_conditions?(cart_content, product_code) }
       let(:product_code) { :AP1 }
       it 'check rule conditions' do
-        puts "rule.conditions = #{rule.conditions}"
-        puts "product_code = #{product_code}"
         expect(to_apply_rule).to eq(false)
       end
     end
