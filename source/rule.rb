@@ -1,3 +1,4 @@
+# Rule init; Check, whether rule can be executed
 class Rule
   attr_reader :title, :conditions, :cart_actions, :pricing_actions
 
@@ -10,11 +11,11 @@ class Rule
 
   def satisfies_conditions?(cart_content, product_code)
     conditions.all? do |condition|
-      check_rule_to_execute?(
-        cart_content[condition['product_code'].to_sym],
-        condition['comparison'].to_sym,
-        condition['qty']
-      ) if product_code == condition['product_code'].to_sym
+      if product_code == condition['product_code'].to_sym
+        check_rule_to_execute?(
+          cart_content[condition['product_code'].to_sym], condition['comparison'].to_sym, condition['qty']
+        )
+      end
     end
   end
 

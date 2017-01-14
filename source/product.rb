@@ -1,3 +1,4 @@
+# Products data initializing and retrieving, being downloaded from JSON file.
 class Product
   attr_accessor :products_attributes
 

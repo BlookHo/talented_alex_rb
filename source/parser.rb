@@ -1,8 +1,8 @@
 require 'json'
 require './source/product'
 
+# Download rules and products from JSON files (without database storage at the moment)
 class Parser
-
   def self.load_rules(filepath)
     JSON.parse(File.read(filepath))['rules']
   end

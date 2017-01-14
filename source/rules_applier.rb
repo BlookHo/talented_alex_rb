@@ -1,3 +1,4 @@
+# Methods: start check, whether rule can be applied; start rule execution; update cart data after rule execution
 class RulesApplier
   attr_reader :checkout, :product_code
 
@@ -58,5 +59,4 @@ class RulesApplier
     action_value = action['qty']
     instance_eval("#{action_object} #{action_methods[action_name]} #{action_value}")
   end
-
 end

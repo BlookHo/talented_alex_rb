@@ -1,11 +1,11 @@
 require './source/rules_applier'
 
+# Main class of API entry points: scan, total (according to task)
 class Checkout
-  attr_reader  :cart_content, :prices, :pricing_rules
+  attr_reader :cart_content, :prices, :pricing_rules
   attr_writer :cart_content, :prices
 
-  # todo:
-  # RSpec
+  # TODO: RSpec
 
   def initialize(pricing_rules)
     @pricing_rules = pricing_rules
@@ -26,8 +26,8 @@ class Checkout
   private
 
   def add_product_to_cart(product_code)
-    prices.merge!(product_code => Product.get_product_price(product_code))
-    cart_content.has_key?(product_code) ? cart_content[product_code] += 1 : cart_content.merge!(product_code => 1)
+    cart_content.key?(product_code) ? cart_content[product_code] += 1 : cart_content[product_code] = 1
+    prices[product_code] = Product.get_product_price(product_code)
   end
 
   def try_rules(product_code)
