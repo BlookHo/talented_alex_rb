@@ -1,37 +1,5 @@
 
-## This is my solution for TextMaster's coding test
-
-
-
-I have to notice that IMHO some of the following test baskets, provided by TextMaster - have errors.
-If basket presented above represent final basket content, i.e. after pricing rules applying,
-first basket content should be:
-
-```
-Basket 1 ruled out content: FR1, FR1, AP1, FR1, FR1, CF1
-Total price expected: $22.45
-```
-First rule (with FR1) will add one free FR1 to the cart after this product scanning.
-According to Rule#1 FR1 price should be 1.555.
-So, final total price of this basket is incorrect and should be: 22.45
-
-Second basket is also incorrect. Having scanned FR1 and Ruke#1 evaluate increasing of basket content with second FR1.
-Finally this basket total price is 6.22. 
-```
-Basket 2 ruled out content: FR1, FR1, FR1, FR1
-Total price expected: $6.22
-```
-
-Third basket is incorrect.
-Scanning of FR1 will also involve Rule#1 applying. So, this basket content should be:
-
-```
-Basket 3 ruled out content: AP1, AP1, FR1, FR1, AP1
-Total price expected: $16.61
-```
-Total price is correct.
-
-
+## This is my solution for TextMaster's coding test. See [Test content](test_text)
 
 
 ##Requirements
@@ -40,7 +8,10 @@ Total price is correct.
   * Bundler
 
 ##Concept
-Each rule is previously created, should be validated and stored in file `rules.json`.
+
+Main idea from task text: __it needs to be flexible regarding pricing rules__ .
+
+Each rule is previously created, should be validated and stored in JSON file `rules.json` in specific format.
 
 Each rule consists of following data:
   * title
@@ -62,7 +33,15 @@ __less_to__ and __divide__.
 
 __todo:__ Each new rule should be validate when created and stored in JSON file.
 
+Products data is stored in JSON file `products.json`, being previously created and validated.
 
+Rules and products data can be added, changed and deleted by appropriate UI,
+which developing is not a subject of this task.
+
+Method scan involves cart content update and try to execute appropriate pricing rules.
+Each rule can be applied to cart content if its apply conditions are satisfied.
+In this case rule is executed and cart content as well cart prices can be updated 
+according to rule content: e.g. add products to cart and/or make a discount to products price.
 
 ##Usage
 
@@ -78,8 +57,7 @@ price = co.total
 ```
 
 
-#### Test content:
-##### ----------------------------------------------------------------------
+##### [Test content](test_text)----------------------------------------------------------------------
 
 TextMaster's quest for global domination has prompted us to open a supermarket - we sell only three products:
 
@@ -97,7 +75,7 @@ Our CEO is a big fan of buy-one-get-one-free offers and of fruit tea. He wants u
 The COO, though, likes low prices and wants people buying apple to get a price 
 discount for bulk purchases. If you buy 3 or more apple, the price should drop to $4.50.
 Our check-out can scan items in any order, and because the CEO and COO change 
-their minds often, it needs to be flexible regarding our pricing rules.
+their minds often, __it needs to be flexible regarding our pricing rules__.
 
 The interface to our checkout looks like this (shown in Ruby):
 
@@ -127,5 +105,34 @@ Total price expected: $16.61
 ```
 
 PS: Add specs
-##### ----------------------------------------------------------------------
+
+##### --- end of task text -------------------------------------------------------------------
+
+I have to notice that IMHO some of the following test baskets, provided by TextMaster - have errors.
+If basket presented above represent final basket content, i.e. after pricing rules applying,
+first basket content should be:
+
+```
+Basket 1 ruled out content: FR1, FR1, AP1, FR1, FR1, CF1
+Total price expected: $22.45
+```
+First rule (with FR1) will add one free FR1 to the cart after this product scanning.
+According to Rule#1 FR1 price should be 1.555.
+So, final total price of this basket is incorrect and should be: 22.45
+
+Second basket is also incorrect. Having scanned FR1 and Ruke#1 evaluate increasing of basket content with second FR1.
+Finally this basket total price is 6.22. 
+```
+Basket 2 ruled out content: FR1, FR1, FR1, FR1
+Total price expected: $6.22
+```
+
+Third basket is incorrect.
+Scanning of FR1 will also involve Rule#1 applying. So, this basket content should be:
+
+```
+Basket 3 ruled out content: AP1, AP1, FR1, FR1, AP1
+Total price expected: $16.61
+```
+Total price is correct.
 

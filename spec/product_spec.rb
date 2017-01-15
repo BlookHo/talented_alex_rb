@@ -23,7 +23,7 @@ RSpec.describe Product do
       let(:product_code) { :AP1 }
       describe 'get correct price of the product' do
         let(:price) { Product.get_product_price(product_code) }
-        it 'check rule conditions keys  of first rule created' do
+        it 'check product price by product_code' do
           expect(price).to eq(5.00)
         end
       end
@@ -33,8 +33,31 @@ RSpec.describe Product do
       let(:product_code) { :AA1 }
       describe 'do not get correct price to uncorrect product' do
         let(:price) { Product.get_product_price(product_code) }
-        it 'check rule conditions keys  of first rule created' do
+        it 'get product price of unknown product_code' do
           expect(price).to eq(0)
+        end
+      end
+    end
+
+    context 'check - method #find_product for product existing' do
+      let(:product_code) { :AP1 }
+      describe 'get correct product by product_code' do
+        let(:product) { Product.find_product(product_code) }
+        it 'get correct product attributes keys by product_code' do
+          expect(product.products_attributes.keys).to eq(%w(code name price))
+        end
+        it 'get correct product attributes values by product_code' do
+          expect(product.products_attributes.values).to eq(['AP1', 'Apple', 5.0])
+        end
+      end
+    end
+
+    context 'check - method #find_product for unknown product' do
+      let(:product_code) { :AA1 }
+      describe 'find product by unknown product_code' do
+        let(:product) { Product.find_product(product_code) }
+        it 'no product found by unknown product_code' do
+          expect(product).to eq(nil)
         end
       end
     end

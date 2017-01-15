@@ -13,7 +13,9 @@ class Rule
     conditions.all? do |condition|
       if product_code == condition['product_code'].to_sym
         check_rule_to_execute?(
-          cart_content[condition['product_code'].to_sym], condition['comparison'].to_sym, condition['qty']
+          cart_content[condition['product_code'].to_sym],
+          condition['comparison'].to_sym,
+          condition['qty']
         )
       end
     end

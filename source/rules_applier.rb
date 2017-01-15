@@ -1,4 +1,6 @@
-# Methods: start check, whether rule can be applied; start rule execution; update cart data after rule execution
+# Methods: start check, whether rule can be applied;
+# start rule execution;
+# update cart data after rule execution
 class RulesApplier
   attr_reader :checkout, :product_code
 
@@ -18,9 +20,9 @@ class RulesApplier
     rule = Rule.new(rule_attr)
     if rule.satisfies_conditions?(checkout.cart_content, product_code)
       execute_rule(rule, product_code)
-      puts "\nexecute the rule: #{rule.title} \n"
+      puts "\nexecute the rule: #{rule.title[0..7]} \n"
     else
-      puts "\nskip the rule: #{rule.title} \n"
+      puts "\nskip the rule: #{rule.title[0..7]} \n"
     end
   end
 
