@@ -1,5 +1,5 @@
 
-## This is my solution for TextMaster's coding test. See [Test content](#abcd)
+## This is my solution for TextMaster's coding test. See [test content](#test)
 
 
 ##Requirements
@@ -57,7 +57,7 @@ price = co.total
 ```
 
 
-##### Test content<a name="abcd"></a>----------------------------------------------------------------------
+##### Test content<a name="test"></a> -------------------------------------------------------
 
 TextMaster's quest for global domination has prompted us to open a supermarket - we sell only three products:
 
