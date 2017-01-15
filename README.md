@@ -1,5 +1,5 @@
 
-## This is my solution for TextMaster's coding test. See [Test content](test_text)
+## This is my solution for TextMaster's coding test. See [Test content][] (test_text)
 
 
 ##Requirements
@@ -57,7 +57,7 @@ price = co.total
 ```
 
 
-##### [Test content](test_text)----------------------------------------------------------------------
+##### [Test content] (test_text)----------------------------------------------------------------------
 
 TextMaster's quest for global domination has prompted us to open a supermarket - we sell only three products:
 
