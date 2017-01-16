@@ -168,7 +168,7 @@ Total price expected: $6.22
 ```
 
 Third basket is incorrect.
-Scanning of :FR1 will also involve Rule#1 applying. So, this basket content should be:
+Scanning of :FR1 will also involve Rule#1 applying. Rule#2 will be applied as well (three :AP1). So, this basket content should be:
 
 ```
 Basket 3 ruled out content: AP1, AP1, FR1, FR1, AP1
