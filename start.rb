@@ -8,8 +8,8 @@ Parser.load_products(PRODUCTS_FILE)
 
 co = Checkout.new(pricing_rules)
 
-co.scan(:AP1)
-co.scan(:AP1)
-co.scan(:FR1)
-co.scan(:AP1)
-co.scan(:AAP1)
+# co.scan(:AP1)
+# co.scan(:AP1)
+# co.scan(:FR1)
+# co.scan(:AP1)
+# co.scan(:AAP1)

@@ -14,13 +14,12 @@ class Checkout
   def scan(product_code)
     add_product_to_cart(product_code)
     update_cart(try_rules(product_code))
-    puts "\nCurrent Total price = #{total};"
+    puts "\nProduct #{product_code} - scanned;"
   end
 
   def total
-    cart_content.inject(0) { |price, (product, qty)| price += prices[product] * qty }
-    # cart_content.inject(0) { |price, (product, qty)|  + prices[product] * qty }
-
+    total = cart_content.inject(0) { |price, (product, qty)| price += prices[product] * qty }
+    puts "\nCurrent cart total price = #{total};"
   end
 
   def add_product_to_cart(product_code)

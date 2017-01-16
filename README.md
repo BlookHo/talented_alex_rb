@@ -1,5 +1,5 @@
 
-## This is my solution for TextMaster's coding test. (Test text - [here](#test))
+## This is my solution for TextMaster's coding test. Test text - [here](#test)
 
 
 ##Requirements
@@ -22,23 +22,26 @@ Each rule consists of the following data:
 Conditions, cart_actions and product_pricing - can have multiple occurances in one rule.
 Each rule can be applied to a product cart when all conditions are fulfilled.
 
+
 Possible `conditions ` of one rule's apply are: __more__, __more_and_equal__, __less_and_equal__,
 __less__ and __equal__. They are stored in a constant COMPARE_METHODS.
 
 Possible one rule's `cart_actions ` are: __add__, __multiply__ and __set_to__. 
-They are stored in a constant COMPARE_METHODS.
+They are stored in a constant ACTIONS_METHODS.
 
-Possible `product_pricing ` of a rule are the following: __discount__, __set_to__,
-__less_to__ and __divide__.
+Possible `pricing_actions ` of a rule are the following: __set_to__, __less_to__ and __divide__.
+They are stored in a constant PRICING_METHODS.
 
-__todo:__ Each new rule should be validated when being created and stored in JSON file.
+__TODO:__ Each new rule should be validated when being created and stored in JSON file.
+
+
 
 Products data is stored in JSON file `products.json`, and is being created and validated before running the program.
 
 
 ##Usage
 
-  Run in project folder __source 'start.rb'__
+  Run in project folder: __source 'start.rb'__
   
   App usage example:
   
@@ -61,6 +64,8 @@ Total cart price can be retieved with __co.total__ call.
 If scanned  product is unknown- it will be added to cart, but with zero price.
 In this case message "Price to be determined" is shown and total cart price 
 does not include price of unknown product.
+
+Rspec tests run in project folder: __bundle exec rspec__
 
 
 
@@ -121,30 +126,30 @@ PS: Add specs
 
 
 I have to notice that IMHO some of the following test baskets, provided by TextMaster - have errors.
-If basket presented above represent final basket content, i.e. after pricing rules applying,
+If baskets from this task text shown above, represent final basket content, i.e. after pricing rules applying,
 first basket content should be:
 
 ```
 Basket 1 ruled out content: FR1, FR1, AP1, FR1, FR1, CF1
 Total price expected: $22.45
 ```
-First rule (with FR1) will add one free FR1 to the cart after this product scanning.
-According to Rule#1 FR1 price should be 1.555.
+First rule (with the product :FR1) will add one free :FR1 to the cart after this product scanning.
+According to Rule#1 :FR1 price should be 50% less, i.e. 1.555.
 So, final total price of this basket is incorrect and should be: 22.45
 
-Second basket is also incorrect. Having scanned FR1 and Ruke#1 evaluate increasing of basket content with second FR1.
-Finally this basket total price is 6.22. 
+Second basket is also incorrect. Having scanned :FR1 and Rule#1 evaluate increasing of basket content with second free :FR1.
+Finally this basket total price will be 6.22. 
 ```
 Basket 2 ruled out content: FR1, FR1, FR1, FR1
 Total price expected: $6.22
 ```
 
 Third basket is incorrect.
-Scanning of FR1 will also involve Rule#1 applying. So, this basket content should be:
+Scanning of :FR1 will also involve Rule#1 applying. So, this basket content should be:
 
 ```
 Basket 3 ruled out content: AP1, AP1, FR1, FR1, AP1
 Total price expected: $16.61
 ```
-Total price is correct.
+Third basket total price is correct.
 
