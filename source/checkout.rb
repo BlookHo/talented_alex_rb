@@ -18,8 +18,7 @@ class Checkout
   end
 
   def total
-    total = cart_content.inject(0) { |price, (product, qty)| price += prices[product] * qty }
-    puts "\nCurrent cart total price = #{total};"
+    cart_content.inject(0) { |price, (product, qty)| price += prices[product] * qty }
   end
 
   def add_product_to_cart(product_code)

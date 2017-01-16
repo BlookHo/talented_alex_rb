@@ -43,6 +43,7 @@ Products data is stored in JSON file `products.json`, and is being created and v
 
   Run in project folder (irb): __source 'start.rb'__
   
+  
   App usage example:
   
 ```
@@ -59,13 +60,35 @@ At the same time cart prices can be updated as well, according to rule content a
 E.g. make a discount to product price.
 
 After product being scanned - it will be added to cart, with appropriate price.
-Total cart price can be retieved with __co.total__ call.
+Total cart price can be retrieved with __co.total__ call.
 
-If scanned  product is unknown- it will be added to cart, but with zero price.
+If scanned  product is unknown - it will be added to cart, but with zero price.
 In this case message "Price to be determined" is shown and total cart price 
 does not include price of unknown product.
 
 Rspec tests run in project folder: __bundle exec rspec__
+
+
+Running of following scanns
+```
+co = Checkout.new(pricing_rules)
+co.scan(:AP1)
+co.scan(:AP1)
+co.scan(:FR1)
+co.scan(:AP1)
+co.scan(:AAP1)
+```
+will give following results after final scan:
+
+__co.total__  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cart total price = 16.61
+
+__co.content_cart__ &nbsp;&nbsp; cart content = {:AP1=>3, :FR1=>2, :AAP1=>1} - (undefined product :AAP1 included in the cart)
+
+__co.prices__ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cart prices = {:AP1=>4.5, :FR1=>1.555, :AAP1=>0} - (price of undefined product :AAP1 - to be determined)
+
+Both pricing rules have been applied.
+
+
 
 
 
