@@ -1,5 +1,5 @@
 
-## This is my solution for TextMaster's coding test. See [test content](#test)
+## This is my solution for TextMaster's coding test. (Test text - [here](#test))
 
 
 ##Requirements
@@ -35,13 +35,8 @@ __todo:__ Each new rule should be validate when created and stored in JSON file.
 
 Products data is stored in JSON file `products.json`, being previously created and validated.
 
-Rules and products data can be added, changed and deleted by appropriate UI,
+Rules and products data can be added, changed and deleted by appropriate UI, 
 which developing is not a subject of this task.
-
-Method scan involves cart content update and try to execute appropriate pricing rules.
-Each rule can be applied to cart content if its apply conditions are satisfied.
-In this case rule is executed and cart content as well cart prices can be updated 
-according to rule content: e.g. add products to cart and/or make a discount to products price.
 
 ##Usage
 
@@ -54,10 +49,23 @@ co.scan(item)
 co.scan(item)
 price = co.total
 
-```
+``` 
+Method __co.scan(item)__ involves cart content update and try to execute appropriate pricing rules.
+Each rule can be applied to cart content if it's apply conditions are satisfied.
+In this case rule is executed and cart content is updated - scanned product is added to cart.
+At the same time cart prices can be updated as well, according to rule content and actions.
+E.g. make a discount to product price.
+
+After product being scanned - it will be added to cart, with appropriate price.
+Total cart price can be retieved with __co.total__ call.
+
+If scanned  product is unknown- it will be added to cart, but with zero price.
+In this case message "Price to be determined" is shown and total cart price 
+does not include price of unknown product.
 
 
-##### Test content<a name="test"></a> -------------------------------------------------------
+
+## TextMaster's test content<a name="test"></a> --------------------------------------
 
 TextMaster's quest for global domination has prompted us to open a supermarket - we sell only three products:
 
@@ -106,7 +114,12 @@ Total price expected: $16.61
 
 PS: Add specs
 
-##### --- end of task text -------------------------------------------------------------------
+### --- end of task text ------------------------------------------------------------------
+
+
+
+### --- My notes to task content -----------------------------------------------------
+
 
 I have to notice that IMHO some of the following test baskets, provided by TextMaster - have errors.
 If basket presented above represent final basket content, i.e. after pricing rules applying,
