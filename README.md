@@ -41,7 +41,7 @@ Products data is stored in JSON file `products.json`, and is being created and v
 
 ##Usage
 
-  Run in project folder: __source 'start.rb'__
+  Run in project folder (irb): __source 'start.rb'__
   
   App usage example:
   
