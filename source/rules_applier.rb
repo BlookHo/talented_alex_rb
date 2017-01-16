@@ -10,9 +10,7 @@ class RulesApplier
   end
 
   def execute
-    checkout.pricing_rules.each do |rule|
-      try_rule(rule, product_code)
-    end
+    checkout.pricing_rules.each { |rule| try_rule(rule, product_code) }
     checkout
   end
 

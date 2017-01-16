@@ -11,38 +11,37 @@
 
 Main idea from task text: __it needs to be flexible regarding pricing rules__ .
 
-Each rule is previously created, should be validated and stored in JSON file `rules.json` in specific format.
+Each rule was created before running the program and should be validated and stored in JSON file `rules.json` in specific format.
 
-Each rule consists of following data:
+Each rule consists of the following data:
   * title
   * conditions
   * cart_actions
   * pricing_actions
   
-Conditions, cart_actions and product_pricing - can be multiple in one rule.
-Each rule can be applied to product cart when all conditions fulfilled.
+Conditions, cart_actions and product_pricing - can have multiple occurances in one rule.
+Each rule can be applied to a product cart when all conditions are fulfilled.
 
 Possible `conditions ` of one rule's apply are: __more__, __more_and_equal__, __less_and_equal__,
-__less__ and __equal__. Stored in constant COMPARE_METHODS.
+__less__ and __equal__. They are stored in a constant COMPARE_METHODS.
 
 Possible one rule's `cart_actions ` are: __add__, __multiply__ and __set_to__. 
-Stored in constant ACTIONS_METHODS.
+They are stored in a constant COMPARE_METHODS.
 
-Possible `product_pricing ` of one rule are following: __discount__, __set_to__,
+Possible `product_pricing ` of a rule are the following: __discount__, __set_to__,
 __less_to__ and __divide__.
 
-__todo:__ Each new rule should be validate when created and stored in JSON file.
+__todo:__ Each new rule should be validated when being created and stored in JSON file.
 
-Products data is stored in JSON file `products.json`, being previously created and validated.
+Products data is stored in JSON file `products.json`, and is being created and validated before running the program.
 
-Rules and products data can be added, changed and deleted by appropriate UI, 
-which developing is not a subject of this task.
 
 ##Usage
 
   Run in project folder __source 'start.rb'__
   
-  API calls:
+  App usage example:
+  
 ```
 co = Checkout.new(pricing_rules)
 co.scan(item)

@@ -16,9 +16,9 @@ RSpec.describe RulesApplier do
     let(:prices) { co.prices }
 
     context 'check results after scanning of product with code :AP1' do
+      before { products }
       describe 'checkout attributes after rules & products load' do
         it 'check co.cart_content before scan' do
-          products
           expect(cart_content).to eq({})
         end
         it 'check co.prices before scan' do
@@ -29,10 +29,13 @@ RSpec.describe RulesApplier do
 
     context 'check add product to cart with product_code :FR1' do
       let(:product_code) { :FR1 }
-      before { co.add_product_to_cart(product_code) }
+      before do
+        products
+        co.add_product_to_cart(product_code)
+      end
+
       describe 'chec add_product_to_cart product_code = :FR1' do
         it 'check co.cart_content before scan' do
-          products
           expect(cart_content).to eq(FR1: 1)
         end
         it 'check co.prices before scan' do
@@ -43,10 +46,13 @@ RSpec.describe RulesApplier do
 
     context 'check add unknown product to cart with product_code :AAP1' do
       let(:unknown_product_code) { :AAP1 }
-      before { co.scan(unknown_product_code) }
+      before do
+        products
+        co.scan(unknown_product_code)
+      end
+
       describe 'chec add_product_to_cart with unknown_product_code = :AP1' do
         it 'check co.cart_content before scan' do
-          products
           expect(cart_content).to eq(AAP1: 1)
         end
         it 'check co.prices before scan' do
@@ -58,8 +64,8 @@ RSpec.describe RulesApplier do
     context 'scan of two same products :AP1 - no rules apply' do
       let(:product_code) { :AP1 }
       before do
-        co.scan(product_code)
-        co.scan(product_code)
+        products
+        2.times { co.scan(product_code) }
       end
 
       describe 'checkout attributes after loading of rules & products before scan' do
@@ -79,14 +85,12 @@ RSpec.describe RulesApplier do
     context 'scan of three same products :AP1 - 2nd rule apply' do
       let(:product_code) { :AP1 }
       before do
-        co.scan(product_code)
-        co.scan(product_code)
-        co.scan(product_code)
+        products
+        3.times { co.scan(product_code) }
       end
 
       describe 'checkout attributes after  after scanning and 2nd rule apply' do
         it 'check co.cart_content' do
-          products
           expect(co.cart_content).to eq(AP1: 3)
         end
         it 'check co.prices before scan' do
@@ -103,15 +107,13 @@ RSpec.describe RulesApplier do
       let(:product_code_two) { :FR1 }
 
       before do
-        co.scan(product_code_one)
-        co.scan(product_code_one)
-        co.scan(product_code_one)
+        products
+        3.times { co.scan(product_code_one) }
         co.scan(product_code_two)
       end
 
       describe 'checkout attributes after after scanning and both rules apply' do
         it 'check co.cart_content' do
-          products
           expect(co.cart_content).to eq(AP1: 3, FR1: 2)
         end
         it 'check co.prices before scan' do
