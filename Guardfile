@@ -79,3 +79,9 @@ guard :rspec, cmd: 'bundle exec rspec' do
     Dir[File.join('**/#{m[1]}.feature')][0] || 'spec/acceptance'
   end
 end
+
+# To run rubocop at every guard run
+# guard :rubocop do
+#   watch(%r{.+\.rb$})
+#   watch(%r{(?:.+/)?\.rubocop\.yml$}) { |m| File.dirname(m[0]) }
+# end
